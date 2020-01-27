@@ -1,6 +1,9 @@
 /data/*
 venv
 .idea
-/config.sh
-/configs/*
+
+/conf.d/*
 /docker/secrets/*
+
+/config.sh
+/plugins.txt

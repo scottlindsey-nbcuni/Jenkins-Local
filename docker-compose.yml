@@ -15,7 +15,7 @@ services:
 
     volumes:
       - "./data:/var/jenkins_home"
-      - "./configs:/var/jenkins_home/casc_configs"
+      - "./conf.d:/var/jenkins_home/casc_configs"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
     environment:
