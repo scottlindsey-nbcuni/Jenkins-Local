@@ -15,6 +15,10 @@ cd $__root
 checkVar APP_PORT
 checkVar JENKINS_USER
 checkVar JENKINS_PASS
+checkVar JENKINS_HOSTNAME
+
+echo $JENKINS_HOSTNAME
+
 checkTool docker
 checkTool docker-compose
 

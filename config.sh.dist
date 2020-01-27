@@ -1,3 +1,7 @@
+# Copy this file to config.sh and update or enter values
+
+export JENKINS_HOSTNAME=localhost
+export APP_PORT=8080
+
 export JENKINS_USER=
 export JENKINS_PASS=
-export APP_PORT=8080

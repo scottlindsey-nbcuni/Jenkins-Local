@@ -15,8 +15,9 @@ cd $__root
 checkVar APP_PORT
 checkVar JENKINS_USER
 checkVar JENKINS_PASS
+checkVar JENKINS_HOSTNAME
 
-JENKINS_HOST=$JENKINS_USER:$JENKINS_PASS@localhost:$APP_PORT
+JENKINS_HOST=$JENKINS_USER:$JENKINS_PASS@$JENKINS_HOSTNAME:$APP_PORT
 
 curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | \
     perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/' | \
