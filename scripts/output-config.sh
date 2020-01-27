@@ -15,11 +15,8 @@ cd $__root
 checkVar APP_PORT
 checkVar JENKINS_USER
 checkVar JENKINS_PASS
-checkTool docker
-checkTool docker-compose
 
-echo $JENKINS_USER>docker/secrets/jenkins-user
-echo $JENKINS_PASS>docker/secrets/jenkins-pass
+JENKINS_HOST=$JENKINS_USER:$JENKINS_PASS@localhost:$APP_PORT
 
-docker-compose up --build
+curl -sSL -X POST "http://$JENKINS_HOST/configuration-as-code/export"
 
