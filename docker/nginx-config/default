@@ -23,7 +23,19 @@ server {
 	client_max_body_size 0;
 
 	location / {
-       proxy_pass http://jenkins:8080;
+        # from https://github.com/linuxserver/reverse-proxy-confs/blob/master/jenkins.subfolder.conf.sample
+       client_max_body_size 10m;
+
+       sendfile off;
+
+       include /config/nginx/proxy.conf;
+       proxy_max_temp_file_size 0;
+       proxy_temp_file_write_size 64k;
+       proxy_request_buffering off;
+       proxy_buffering off;
+       resolver 127.0.0.11 valid=30s;
+       set $upstream_jenkins jenkins;
+       proxy_pass http://$upstream_jenkins:8080;
 	}
 }
 
