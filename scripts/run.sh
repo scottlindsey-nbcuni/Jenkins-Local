@@ -36,5 +36,7 @@ export LE_ENTRYPOINT;
 echo $JENKINS_USER>docker/secrets/jenkins-user
 echo $JENKINS_PASS>docker/secrets/jenkins-pass
 
+mkdir -p data
+
 docker-compose up --build
 
