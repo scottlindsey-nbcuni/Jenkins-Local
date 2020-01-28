@@ -2,29 +2,41 @@ version: '3.5'
 services:
   jenkins:
     container_name: jenkins-local
-
     image: jenkins-local-image
-
     build:
       context: .
       dockerfile: ./docker/images/jenkins/Dockerfile
-
     ports:
       - "${APP_PORT}:8080"
       - "50000:50000"
-
     volumes:
       - "./data:/var/jenkins_home"
       - "./conf.d:/var/jenkins_home/casc_configs"
       - "/var/run/docker.sock:/var/run/docker.sock"
-
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs
       - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
-
     secrets:
       - jenkins-user
       - jenkins-pass
+
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - URL=${EXTERNAL_HOSTNAME}
+      - VALIDATION=http
+    ports:
+      - 443:443
+      - 80:80
+    restart: "no"
+    entrypoint: "${LE_ENTRYPOINT}"
+    volumes:
+      - "./docker/nginx-config/default:/defaults/default"
+    depends_on:
+      - jenkins
 
 secrets:
   jenkins-user:

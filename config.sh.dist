@@ -5,3 +5,7 @@ export APP_PORT=8080
 
 export JENKINS_USER=
 export JENKINS_PASS=
+
+# to enable https, set EXTERNAL_CONTECTIVITY to "TRUE" and add a valid hostname
+export EXTERNAL_CONTECTIVITY=FALSE
+export EXTERNAL_HOSTNAME=

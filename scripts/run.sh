@@ -22,6 +22,17 @@ echo $JENKINS_HOSTNAME
 checkTool docker
 checkTool docker-compose
 
+
+## if EXT_HTTP is true, set entry point to a valid value
+LE_ENTRYPOINT="/bin/false"
+
+if [ "x$EXTERNAL_CONTECTIVITY" = 'xTRUE' ]; then
+    checkVar EXTERNAL_HOSTNAME
+    LE_ENTRYPOINT="/init"
+fi
+export LE_ENTRYPOINT;
+
+
 echo $JENKINS_USER>docker/secrets/jenkins-user
 echo $JENKINS_PASS>docker/secrets/jenkins-pass
 
