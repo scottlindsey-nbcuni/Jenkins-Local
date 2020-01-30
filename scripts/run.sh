@@ -29,6 +29,8 @@ LE_ENTRYPOINT="/bin/false"
 if [ "x$EXTERNAL_CONTECTIVITY" = 'xTRUE' ]; then
     checkVar EXTERNAL_HOSTNAME
     LE_ENTRYPOINT="/init"
+else
+    teal "To enable SSL, set EXTERNAL_CONTECTIVITY=TRUE"
 fi
 export LE_ENTRYPOINT;
 
